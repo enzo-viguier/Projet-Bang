@@ -1,0 +1,8 @@
+Q27. Si Slab le Tueur jour un Bang! et Suzy Lafayette a un Raté! en main et le joue, peut elle piocher une nouvelle carte pour éventuellement piocher un second Raté! ?
+R. Oui
+
+Q28. Que se passe-t-il si Suzy Lafayette blesse El Gringo en utilisant sa dernière carte en main ?
+R. Les pouvoirs des personnages sont appliqués dans l'ordre suivant : d'abord Suzy Lafayette pioche une carte, puis El Gringo prend cette carte de la main de Suzy Lafayette. Enfin Suzy Lafayette pioche une nouvelle carte car elle n'a plus de carte en main.
+
+Q29. Que se passe-t-il si un joueur oublie d'utiliser l'effet d'une carte (par exemple une Planque) ou le pouvoir de son personnage ?
+R. La plupart des pouvoirs ou effets ne sont pas obligatoires. Dans ce cas si le joueur oublie d'exécuter un effet il peut corriger la situation tant qu'aucune autre carte n'a été jouée.
