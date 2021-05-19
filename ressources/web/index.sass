@@ -1,0 +1,222 @@
+/*** Fonts ***/
+
+@font-face
+  font-family: "DustWest"
+  src: url("fonts/DustWest.woff") format('woff')
+
+@font-face
+  font-family: "Kingthings"
+  src: url("fonts/Kingthings.ttf") format('truetype')
+
+/*** Constants ***/
+
+$titles_font: DustWest, serif
+$mono_font: Kingthings, monospace
+
+/*** Animations ***/
+
+@keyframes active
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.03)
+  100%
+    transform: scale(1)
+
+/*** Style ***/
+
+*
+  box-sizing: border-box
+
+html
+  font-family: $mono_font
+  font-size: 12pt
+
+  background: url(images/wood.jpg) no-repeat center center fixed
+  background-blend-mode: screen
+  background-size: cover
+
+body
+  margin: 0
+  padding: 8px 0
+
+#root
+  width: 100%
+
+#main
+  width: 100%
+  margin: auto
+  padding: 0
+  display: flex
+  flex-direction: column
+  --card-width: 8vw
+
+  &.row3
+    --card-width: 5.5vw
+
+/*** Buttons ***/
+
+#instruction_text
+  margin: 0 calc(0.25 * var(--card-width))
+
+.button
+  display: inline-block
+  margin: 0
+  text-align: center
+  padding: 2px 5px
+  line-height: 1
+  border-radius: 3px
+  text-decoration: none
+  color: #000000
+  background: #e7e5db
+  border: solid 1px #000000
+  min-width: 80px
+  margin: 0 calc(0.02 * var(--card-width))
+
+  &:hover
+    cursor: pointer
+
+  &.disabled
+    color: #A0A0A0
+    border: solid 1px #A0A0A0
+
+.card
+  // all dimensions in cards are relative to the card's width so that the card is fully scalable
+  width: var(--card-width)
+  // should be defined in one of the card's parent element
+  height: calc(1.57 * var(--card-width))
+  // fixed-ratio element
+  margin: 0
+  background-size: cover
+  border-radius: calc(.1 * var(--card-width))
+  box-shadow: calc(.04 * var(--card-width)) calc(.04 * var(--card-width)) calc(.04 * var(--card-width)) #333
+  display: flex
+  justify-content: center
+  padding: 0
+
+  &.phantom
+    // invisible card to keep the space
+    box-shadow: none
+
+  .name
+    font-family: $titles_font
+    white-space: nowrap
+    margin-top: calc(.12 * var(--card-width))
+    font-size: calc(.28 * var(--card-width))
+    padding: 0
+
+  &.character .name
+    font-size: calc(.18 * var(--card-width))
+
+.row
+  display: flex
+  flex-direction: row
+
+.players_area > .row
+  justify-content: space-evenly
+
+.player_info
+  display: flex
+  flex-direction: column
+  width: calc(6 * var(--card-width))
+  margin-bottom: 2vw
+  flex-shrink: 0
+  flex-grow: 1
+  align-items: center
+
+  &.turn_player
+    background-color: #FFF8
+
+  .player_name
+    font-family: $titles_font
+    font-weight: bold
+    width: 100%
+    height: 4vw
+    font-size: 4vw
+    text-align: center
+  //margin-left: calc(1.2 * var(--card-width))
+
+  &.active .character
+    animation: active .5s infinite
+
+  .character_info
+    display: flex
+    flex-direction: row
+    justify-content: center
+    position: relative
+    --hp-bullet-width: calc(.82 * var(--card-width))
+    margin-bottom: 1.5vw
+    margin-right: 1.5vw
+    margin-left: 2vw
+
+    .hp
+      display: flex
+      flex-direction: column-reverse
+      margin-left: calc(.05 * var(--card-width))
+
+      .hp_bullet
+        width: var(--hp-bullet-width)
+        height: calc(.37 * var(--hp-bullet-width))
+        background-size: cover
+
+    .role
+      margin-right: calc(-.5 * var(--card-width))
+      transform: rotate(-30deg)
+
+    .character
+      z-index: 1
+      // needed so that the role card stays under the character card
+
+      &:hover + .tooltip
+        display: block
+
+  .hand, .in_play
+    //margin: calc(.02 * var(--card-width))
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: center
+
+    .duplicate
+      margin-right: calc(-0.75 * var(--card-width))
+
+#piles
+  display: flex
+  flex-direction: row
+  margin-top: 15px
+
+  .card
+    margin-right: calc(-1 * var(--card-width))
+    // cards are stacked on top of each other
+    margin-left: calc(.01 * var(--card-width))
+
+    &:last-child
+      margin-right: 0
+
+  #draw_pile, #discard_pile
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    margin-right: 2vw
+
+  #draw_pile
+    margin-left: calc(.25 * var(--card-width))
+
+    .card
+      // randomize rotation
+      @for $i from 0 to 20
+        &:nth-of-type(20n + #{$i})
+          transform: rotate(#{random(15) - 7.5}deg)
+
+  #discard_pile
+    .card
+      // randomize rotation
+      @for $i from 0 to 20
+        &:nth-of-type(20n + #{$i})
+          transform: rotate(#{random(30) - 15}deg)
+
+      &:nth-last-of-type(-n + 5)
+        margin-left: calc(.6 * var(--card-width))
+
+      &:first-child
+        margin-left: 0

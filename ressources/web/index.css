@@ -1,0 +1,329 @@
+/*** Fonts ***/
+@font-face {
+  font-family: "DustWest";
+  src: url("fonts/DustWest.woff") format("woff");
+}
+@font-face {
+  font-family: "Kingthings";
+  src: url("fonts/Kingthings.ttf") format("truetype");
+}
+/*** Constants ***/
+/*** Animations ***/
+@keyframes active {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/*** Style ***/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Kingthings, monospace;
+  font-size: 12pt;
+  background: url(images/wood.jpg) no-repeat center center fixed;
+  background-blend-mode: screen;
+  background-size: cover;
+}
+
+body {
+  margin: 0;
+  padding: 8px 0;
+}
+
+#root {
+  width: 100%;
+}
+
+#main {
+  width: 100%;
+  margin: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  --card-width: 8vw;
+}
+#main.row3 {
+  --card-width: 5.5vw;
+}
+
+/*** Buttons ***/
+#instruction_text {
+  margin: 0 calc(0.25 * var(--card-width));
+}
+
+.button {
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  padding: 2px 5px;
+  line-height: 1;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #000000;
+  background: #e7e5db;
+  border: solid 1px #000000;
+  min-width: 80px;
+  margin: 0 calc(0.02 * var(--card-width));
+}
+.button:hover {
+  cursor: pointer;
+}
+.button.disabled {
+  color: #A0A0A0;
+  border: solid 1px #A0A0A0;
+}
+
+.card {
+  width: var(--card-width);
+  height: calc(1.57 * var(--card-width));
+  margin: 0;
+  background-size: cover;
+  border-radius: calc(.1 * var(--card-width));
+  box-shadow: calc(.04 * var(--card-width)) calc(.04 * var(--card-width)) calc(.04 * var(--card-width)) #333;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.card.phantom {
+  box-shadow: none;
+}
+.card .name {
+  font-family: DustWest, serif;
+  white-space: nowrap;
+  margin-top: calc(.12 * var(--card-width));
+  font-size: calc(.28 * var(--card-width));
+  padding: 0;
+}
+.card.character .name {
+  font-size: calc(.18 * var(--card-width));
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.players_area > .row {
+  justify-content: space-evenly;
+}
+
+.player_info {
+  display: flex;
+  flex-direction: column;
+  width: calc(6 * var(--card-width));
+  margin-bottom: 2vw;
+  flex-shrink: 0;
+  flex-grow: 1;
+  align-items: center;
+}
+.player_info.turn_player {
+  background-color: #FFF8;
+}
+.player_info .player_name {
+  font-family: DustWest, serif;
+  font-weight: bold;
+  width: 100%;
+  height: 4vw;
+  font-size: 4vw;
+  text-align: center;
+}
+.player_info.active .character {
+  animation: active 0.5s infinite;
+}
+.player_info .character_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  --hp-bullet-width: calc(.82 * var(--card-width));
+  margin-bottom: 1.5vw;
+  margin-right: 1.5vw;
+  margin-left: 2vw;
+}
+.player_info .character_info .hp {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-left: calc(.05 * var(--card-width));
+}
+.player_info .character_info .hp .hp_bullet {
+  width: var(--hp-bullet-width);
+  height: calc(.37 * var(--hp-bullet-width));
+  background-size: cover;
+}
+.player_info .character_info .role {
+  margin-right: calc(-.5 * var(--card-width));
+  transform: rotate(-30deg);
+}
+.player_info .character_info .character {
+  z-index: 1;
+}
+.player_info .character_info .character:hover + .tooltip {
+  display: block;
+}
+.player_info .hand, .player_info .in_play {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.player_info .hand .duplicate, .player_info .in_play .duplicate {
+  margin-right: calc(-0.75 * var(--card-width));
+}
+
+#piles {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+#piles .card {
+  margin-right: calc(-1 * var(--card-width));
+  margin-left: calc(.01 * var(--card-width));
+}
+#piles .card:last-child {
+  margin-right: 0;
+}
+#piles #draw_pile, #piles #discard_pile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: 2vw;
+}
+#piles #draw_pile {
+  margin-left: calc(.25 * var(--card-width));
+}
+#piles #draw_pile .card:nth-of-type(20n + 0) {
+  transform: rotate(2.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 1) {
+  transform: rotate(0.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 2) {
+  transform: rotate(-6.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 3) {
+  transform: rotate(5.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 4) {
+  transform: rotate(7.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 5) {
+  transform: rotate(7.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 6) {
+  transform: rotate(7.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 7) {
+  transform: rotate(5.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 8) {
+  transform: rotate(6.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 9) {
+  transform: rotate(1.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 10) {
+  transform: rotate(-0.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 11) {
+  transform: rotate(4.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 12) {
+  transform: rotate(0.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 13) {
+  transform: rotate(6.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 14) {
+  transform: rotate(-3.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 15) {
+  transform: rotate(6.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 16) {
+  transform: rotate(-1.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 17) {
+  transform: rotate(-2.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 18) {
+  transform: rotate(4.5deg);
+}
+#piles #draw_pile .card:nth-of-type(20n + 19) {
+  transform: rotate(0.5deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 0) {
+  transform: rotate(11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 1) {
+  transform: rotate(7deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 2) {
+  transform: rotate(10deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 3) {
+  transform: rotate(-5deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 4) {
+  transform: rotate(11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 5) {
+  transform: rotate(5deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 6) {
+  transform: rotate(6deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 7) {
+  transform: rotate(4deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 8) {
+  transform: rotate(11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 9) {
+  transform: rotate(-3deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 10) {
+  transform: rotate(1deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 11) {
+  transform: rotate(6deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 12) {
+  transform: rotate(-1deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 13) {
+  transform: rotate(6deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 14) {
+  transform: rotate(-11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 15) {
+  transform: rotate(-9deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 16) {
+  transform: rotate(-11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 17) {
+  transform: rotate(-6deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 18) {
+  transform: rotate(-11deg);
+}
+#piles #discard_pile .card:nth-of-type(20n + 19) {
+  transform: rotate(5deg);
+}
+#piles #discard_pile .card:nth-last-of-type(-n + 5) {
+  margin-left: calc(.6 * var(--card-width));
+}
+#piles #discard_pile .card:first-child {
+  margin-left: 0;
+}
+
+/*# sourceMappingURL=index.css.map */
